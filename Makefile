@@ -6,9 +6,9 @@ RM = rm -rf
 LIBFT_PATH = libs/libft
 LIBFT = $(LIBFT_PATH)/libft.a
 
-HEADERS = -I ./libs -I $(LIBFT_PATH)
+HEADERS = -I ./libs -I $(LIBFT_PATH)  -I ./includes
 
-SRCS =	
+SRCS =	$(wildcard $(SRCDIR)/*.c)
 
 OBJS = $(SRCS:$(SRCDIR)%.c=$(OBJDIR)%.o)
 SRCDIR = src/
