@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/16 15:06:46 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:29:29 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_init(char **argv, t_pip	*lst)
 {
 	lst->filename1 = argv[1];
 	lst->cmd1 = argv[2];
-	lst->filename2 = argv[3];
-	lst->cmd2 = argv[4];
+	lst->filename2 = argv[4];
+	lst->cmd2 = argv[3];
 }
 
 int	main(int argc, char **argv)
