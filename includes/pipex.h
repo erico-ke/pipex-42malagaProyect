@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
+/*   By: erico-ke <erico-ke@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:37:43 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/16 15:06:01 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:09:17 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ typedef struct pipex
 	char	*cmd2;
 }	t_pip;
 
-int	print_error(char *str);
+/* Error control and memory leaks management */
+int		print_error(char *str);
+void	ft_free_split(char **split);
+
+/* Fork process and path management*/
+char	*get_cmd_path(char *cmd);
+void	child_process(t_pip *lst, int *fd);
+void	parent_process(t_pip *lst, int *fd, pid_t pid);
 
 #endif
