@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:37:43 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/21 12:27:03 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:47:13 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct pipex
 }	t_pip;
 
 /* Error control and memory leaks management */
-int		print_error(char *str);
-void	ft_free_split(char **split);
+int		prnt_err(char *str);
+void	free_splt(char **split);
 
 /* Fork process and path management*/
 char	*get_cmd_path(char *cmd, char **env);

@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erico-ke <erico-ke@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 14:47:14 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/18 21:04:01 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:47:46 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-int	print_error(char *str)
+int	prnt_err(char *str)
 {
 	ft_printf("Error, %s.\n", 2, str);
 	return (EXIT_FAILURE);
 }
 
-void	ft_free_split(char **split)
+void	free_splt(char **split)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (!split)
 		return ;
 	while (split[i])

@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/21 13:19:00 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:45:48 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,16 @@ int	main(int argc, char **argv, char **env)
 	pid_t	pid;
 
 	if (argc != 5)
-		return (print_error("usage: ./pipex file1 cmd1 cmd2 file2"));
+		return (prnt_err("usage: ./pipex file1 cmd1 cmd2 file2"));
 	lst = malloc(sizeof(t_pip));
 	if (!lst)
-		return (print_error("malloc failed"));
+		return (prnt_err("malloc failed"));
 	ft_init(argv, lst);
 	if (pipe(fd) == -1)
-		return (print_error("pipe failed"));
+		return (prnt_err("pipe failed"));
 	pid = fork();
 	if (pid < 0)
-		return (print_error("fork failed"));
+		return (prnt_err("fork failed"));
 	else if (pid == 0)
 		child_process(lst, fd, env);
 	else
@@ -44,7 +44,6 @@ int	main(int argc, char **argv, char **env)
 	free(lst);
 	return (EXIT_SUCCESS);
 }
-
 
 // En los casos de error de que falla la pipe o el fork hay que
 //liberar memoria
