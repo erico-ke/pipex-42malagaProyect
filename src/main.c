@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erico-ke <erico-ke@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/18 21:07:34 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:24:42 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_init(char **argv, t_pip	*lst)
 	lst->filename2 = argv[4];
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **env)
 {
 	t_pip	*lst;
 	int		fd[2];
@@ -38,9 +38,9 @@ int	main(int argc, char **argv)
 	if (pid < 0)
 		return (print_error("fork failed"));
 	else if (pid == 0)
-		child_process(lst, fd);
+		child_process(lst, fd, env);
 	else
-		parent_process(lst, fd, pid);
+		parent_process(lst, fd, pid, env);
 	free(lst);
 	return (EXIT_SUCCESS);
 }

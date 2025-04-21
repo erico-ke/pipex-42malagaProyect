@@ -3,30 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erico-ke <erico-ke@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:05:27 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/18 21:06:16 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:25:30 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-extern char	**environ;
-
-char	*get_cmd_path(char *cmd)
+char	*get_cmd_path(char *cmd, char **env)
 {
-	int		i = 0;
+	int		i;
 	char	**paths;
 	char	*path_env;
 	char	*full_cmd;
 	char	*tmp;
 
-	while (environ[i] && ft_strncmp(environ[i], "PATH=", 5) != 0)
+	i = 0;
+	while (env[i] && ft_strncmp(env[i], "PATH=", 5) != 0)
 		i++;
-	if (!environ[i])
+	if (!env[i])
 		return (NULL);
-	path_env = environ[i] + 5;
+	path_env = env[i] + 5;
 	paths = ft_split(path_env, ':');
 	i = 0;
 	while (paths && paths[i])
@@ -39,6 +38,5 @@ char	*get_cmd_path(char *cmd)
 		free(full_cmd);
 		i++;
 	}
-	ft_free_split(paths);
-	return (NULL);
+	return (ft_free_split(paths), NULL);
 }

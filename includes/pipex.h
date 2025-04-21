@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erico-ke <erico-ke@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:37:43 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/18 21:09:17 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:27:03 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 # include "../libs/libft/src/libft.h"
+# include <sys/wait.h>
 
 typedef struct pipex
 {
@@ -27,8 +28,8 @@ int		print_error(char *str);
 void	ft_free_split(char **split);
 
 /* Fork process and path management*/
-char	*get_cmd_path(char *cmd);
-void	child_process(t_pip *lst, int *fd);
-void	parent_process(t_pip *lst, int *fd, pid_t pid);
+char	*get_cmd_path(char *cmd, char **env);
+void	child_process(t_pip *lst, int *fd, char **env);
+void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env);
 
 #endif

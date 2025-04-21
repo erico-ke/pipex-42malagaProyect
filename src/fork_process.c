@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fork_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: erico-ke <erico-ke@student.42.fr>          +#+  +:+       +#+        */
+/*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:06:39 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/18 21:11:48 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 12:25:13 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-extern char	**environ;
-
-void	child_process(t_pip *lst, int *fd)
+void	child_process(t_pip *lst, int *fd, char **env)
 {
 	int		infile;
 	char	**cmd_args;
@@ -30,15 +28,15 @@ void	child_process(t_pip *lst, int *fd)
 	cmd_args = ft_split(lst->cmd1, ' ');
 	if (!cmd_args)
 		exit(print_error("split cmd1"));
-	cmd_path = get_cmd_path(cmd_args[0]);
+	cmd_path = get_cmd_path(cmd_args[0], env);
 	if (!cmd_path)
 		exit(print_error("cmd1 not found"));
-	execve(cmd_path, cmd_args, environ);
+	execve(cmd_path, cmd_args, env);
 	perror("execve failed");
 	exit(EXIT_FAILURE);
 }
 
-void	parent_process(t_pip *lst, int *fd, pid_t pid)
+void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env)
 {
 	int		outfile;
 	char	**cmd_args;
@@ -55,10 +53,10 @@ void	parent_process(t_pip *lst, int *fd, pid_t pid)
 	cmd_args = ft_split(lst->cmd2, ' ');
 	if (!cmd_args)
 		exit(print_error("split cmd2"));
-	cmd_path = get_cmd_path(cmd_args[0]);
+	cmd_path = get_cmd_path(cmd_args[0], env);
 	if (!cmd_path)
 		exit(print_error("cmd2 not found"));
-	execve(cmd_path, cmd_args, environ);
+	execve(cmd_path, cmd_args, env);
 	perror("execve failed");
 	exit(EXIT_FAILURE);
 }
