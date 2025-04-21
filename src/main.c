@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/21 14:45:48 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:34:44 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int	main(int argc, char **argv, char **env)
 		return (prnt_err("malloc failed"));
 	ft_init(argv, lst);
 	if (pipe(fd) == -1)
-		return (prnt_err("pipe failed"));
+		return (free(lst), prnt_err("pipe failed"));
 	pid = fork();
 	if (pid < 0)
-		return (prnt_err("fork failed"));
+		return (free(lst), prnt_err("fork failed"));
 	else if (pid == 0)
 		child_process(lst, fd, env);
 	else
