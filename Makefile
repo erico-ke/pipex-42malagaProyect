@@ -1,6 +1,6 @@
 NAME = pipex
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 RM = rm -rf
 
 LIBFT_PATH = libs/libft
@@ -24,8 +24,6 @@ $(OBJDIR)%.o: $(SRCDIR)%.c
 
 $(OBJDIR):
 	mkdir -p $@
-#	mkdir ./obj/control ./obj/utils ./obj/moves ./obj/algorith
-#	esto es para crear las carpetas de objetos
 
 $(LIBFT):
 	make -C $(LIBFT_PATH)
