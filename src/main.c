@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/21 12:24:42 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:19:00 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ int	main(int argc, char **argv, char **env)
 	return (EXIT_SUCCESS);
 }
 
+
+// En los casos de error de que falla la pipe o el fork hay que
+//liberar memoria
 
 /* 
 Hay que usar env para sacar el path a las fuinciones de shell,

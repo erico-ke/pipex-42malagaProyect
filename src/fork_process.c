@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:06:39 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/21 12:25:13 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/21 13:24:55 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ void	child_process(t_pip *lst, int *fd, char **env)
 
 	infile = open(lst->filename1, O_RDONLY);
 	if (infile < 0)
+	{
+		free(lst);
 		exit(print_error("input file"));
+	}
 	dup2(infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
@@ -60,3 +63,6 @@ void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env)
 	perror("execve failed");
 	exit(EXIT_FAILURE);
 }
+
+/* Hacer una funcion para liberar memoria en caso de que
+los if con un exit se cumplan */
