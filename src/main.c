@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/23 17:10:33 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:09:51 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 5)
 		return (prnt_err("usage: ./pipex file1 cmd1 cmd2 file2"));
-	if (!valid_input_check(argv[1]) || !valid_input_check(argv[4]))
+	if (valid_input_check(argv[2]) == EXIT_FAILURE
+		|| valid_input_check(argv[3]) == EXIT_FAILURE)
 		return (prnt_err("' is not accepted in the input"));
 	lst = malloc(sizeof(t_pip));
 	if (!lst)
