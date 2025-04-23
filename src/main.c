@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/21 16:34:44 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:08:24 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,20 @@ void	ft_init(char **argv, t_pip	*lst)
 	lst->filename2 = argv[4];
 }
 
+int	valid_input_check(char *check)
+{
+	int	i;
+
+	i = 0;
+	while (check[i])
+	{
+		if (check[i] == 39)
+			return (EXIT_FAILURE);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_pip	*lst;
@@ -28,6 +42,8 @@ int	main(int argc, char **argv, char **env)
 
 	if (argc != 5)
 		return (prnt_err("usage: ./pipex file1 cmd1 cmd2 file2"));
+	if (!valid_input_check(argv[1]) || !valid_input_check(argv[4]))
+		return (prnt_err("' is not accepted in the input"));
 	lst = malloc(sizeof(t_pip));
 	if (!lst)
 		return (prnt_err("malloc failed"));
