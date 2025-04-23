@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:06:39 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/22 15:03:47 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:17:49 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,3 @@ void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env)
 	perror("execve failed");
 	exit(EXIT_FAILURE);
 }
-
-/* Hacer una funcion para liberar memoria en caso de que
-los if con un exit se cumplan */
