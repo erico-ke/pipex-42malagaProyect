@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/08 17:04:03 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:49:38 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,24 @@ static int	valid_input_check(char *check)
 static int	pipe_and_fork(t_pip *lst, char **env)
 {
 	int		fd[2];
-	pid_t	pid;
+	pid_t	pid[2];
 
-	if (pipe(fd) == -1)
-		return (free(lst), prnt_err("pipe failed"));
-	pid = fork();
-	if (pid < 0)
+	pid[0] = fork();
+	if (pid[0] < 0)
 		return (free(lst), prnt_err("fork failed"));
-	else if (pid == 0)
-		child_process(lst, fd, env);
-	else
-		parent_process(lst, fd, pid, env);
+	else if (pid[0] == 0)
+	{
+		if (pipe(fd) == -1)
+			return (free(lst), prnt_err("pipe failed"));
+		pid[1] = fork();
+		if (pid[1] < 0)
+			return (free(lst), prnt_err("fork failed"));
+		else if (pid[1] == 0)
+			child_process(lst, fd, env);
+		else
+			parent_process(lst, fd, pid[1], env);
+	}
+	waitpid(pid[0], NULL, WNOHANG);
 	return (EXIT_SUCCESS);
 }
 
