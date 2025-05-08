@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:05:27 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/08 16:38:52 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:55:41 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_access(t_pip *lst, char **env, char **test)
 			lst->cmd1++;
 		}
 	}
-	free(test);
+	free_splt(test);
 	test = ft_split(lst->cmd2, ' ');
 	lst->cmd2_path = get_cmd_path(test[0], env);
 	if (!lst->cmd2_path)
@@ -66,5 +66,5 @@ void	ft_access(t_pip *lst, char **env, char **test)
 			lst->cmd2++;
 		}
 	}
-	free(test);
+	free_splt(test);
 }

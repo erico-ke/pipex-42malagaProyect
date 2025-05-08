@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/08 16:39:19 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/08 17:04:03 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 static int	ft_init(char **argv, t_pip	*lst)
 {
-	int	i;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	while (argv[++i])
 	{
 		if (ft_strncmp(argv[i], "", 1) == 0)
 			return (EXIT_FAILURE);
-		if (ft_strncmp(ft_strtrim(argv[i], " "), "", 1) == 0)
-			return (EXIT_FAILURE);
+		tmp = ft_strtrim(argv[i], " ");
+		if (ft_strncmp(tmp , "", 1) == 0)
+			return (free(tmp), EXIT_FAILURE);
+		free(tmp);
 	}
 	lst->filename1 = argv[1];
 	lst->cmd1 = argv[2];
@@ -81,6 +84,8 @@ int	main(int argc, char **argv, char **env)
 		pipe_and_fork(lst, env);
 	else
 		return (free(lst), prnt_err("cmd1 or cmd2 not found"));
+	free(lst->cmd1_path);
+	free(lst->cmd2_path);
 	free(lst);
 	return (EXIT_SUCCESS);
 }
