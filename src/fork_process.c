@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:06:39 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/04/23 18:17:49 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:37:45 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	child_process(t_pip *lst, int *fd, char **env)
 {
 	int		infile;
 	char	**cmdarg;
-	char	*cmd_path;
 
 	infile = open(lst->filename1, O_RDONLY);
 	if (infile < 0)
@@ -31,10 +30,7 @@ void	child_process(t_pip *lst, int *fd, char **env)
 	cmdarg = ft_split(lst->cmd1, ' ');
 	if (!cmdarg)
 		return (free(lst), exit(prnt_err("split cmd1")));
-	cmd_path = get_cmd_path(cmdarg[0], env);
-	if (!cmd_path)
-		return (free(lst), free_splt(cmdarg), exit(prnt_err("cmd1 not found")));
-	execve(cmd_path, cmdarg, env);
+	execve(lst->cmd1_path, cmdarg, env);
 	perror("execve failed");
 	exit(EXIT_FAILURE);
 }
@@ -43,7 +39,6 @@ void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env)
 {
 	int		outfile;
 	char	**cmdarg;
-	char	*cmd_path;
 
 	waitpid(pid, NULL, WNOHANG);
 	outfile = open(lst->filename2, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -56,10 +51,7 @@ void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env)
 	cmdarg = ft_split(lst->cmd2, ' ');
 	if (!cmdarg)
 		exit(prnt_err("split cmd2"));
-	cmd_path = get_cmd_path(cmdarg[0], env);
-	if (!cmd_path)
-		return (free_splt(cmdarg), exit(prnt_err("cmd2 not found")));
-	execve(cmd_path, cmdarg, env);
+	execve(lst->cmd2_path, cmdarg, env);
 	perror("execve failed");
 	exit(EXIT_FAILURE);
 }

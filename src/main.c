@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/08 13:42:00 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:39:19 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,26 @@ static int	valid_input_check(char *check)
 	return (EXIT_SUCCESS);
 }
 
+static int	pipe_and_fork(t_pip *lst, char **env)
+{
+	int		fd[2];
+	pid_t	pid;
+
+	if (pipe(fd) == -1)
+		return (free(lst), prnt_err("pipe failed"));
+	pid = fork();
+	if (pid < 0)
+		return (free(lst), prnt_err("fork failed"));
+	else if (pid == 0)
+		child_process(lst, fd, env);
+	else
+		parent_process(lst, fd, pid, env);
+	return (EXIT_SUCCESS);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_pip	*lst;
-	int		fd[2];
-	pid_t	pid;
 
 	if (argc != 5)
 		return (prnt_err("usage: ./pipex file1 cmd1 cmd2 file2"));
@@ -61,15 +76,11 @@ int	main(int argc, char **argv, char **env)
 		return (prnt_err("malloc failed"));
 	if (ft_init(argv, lst) == EXIT_FAILURE)
 		return (free(lst), prnt_err("non-existent arguments"));
-	if (pipe(fd) == -1)
-		return (free(lst), prnt_err("pipe failed"));
-	pid = fork();
-	if (pid < 0)
-		return (free(lst), prnt_err("fork failed"));
-	else if (pid == 0)
-		child_process(lst, fd, env);
+	ft_access(lst, env, NULL);
+	if (lst->cmd1_path && lst->cmd2_path)
+		pipe_and_fork(lst, env);
 	else
-		parent_process(lst, fd, pid, env);
+		return (free(lst), prnt_err("cmd1 or cmd2 not found"));
 	free(lst);
 	return (EXIT_SUCCESS);
 }
