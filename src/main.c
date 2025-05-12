@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/08 17:49:38 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/12 13:31:53 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_init(char **argv, t_pip	*lst)
 		if (ft_strncmp(argv[i], "", 1) == 0)
 			return (EXIT_FAILURE);
 		tmp = ft_strtrim(argv[i], " ");
-		if (ft_strncmp(tmp , "", 1) == 0)
+		if (ft_strncmp(tmp, "", 1) == 0)
 			return (free(tmp), EXIT_FAILURE);
 		free(tmp);
 	}
