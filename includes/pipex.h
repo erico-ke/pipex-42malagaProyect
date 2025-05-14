@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 16:37:43 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/08 16:39:01 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:54:50 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	free_splt(char **split);
 /* Fork process and path management*/
 char	*get_cmd_path(char *cmd, char **env);
 void	child_process(t_pip *lst, int *fd, char **env);
-void	parent_process(t_pip *lst, int *fd, pid_t pid, char **env);
+void	parent_process(t_pip *lst, int *fd, char **env);
 void	ft_access(t_pip *lst, char **env, char **test);
 
 #endif
