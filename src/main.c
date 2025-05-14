@@ -6,7 +6,7 @@
 /*   By: erico-ke <erico-ke@42malaga.student.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:13:38 by erico-ke          #+#    #+#             */
-/*   Updated: 2025/05/12 13:31:53 by erico-ke         ###   ########.fr       */
+/*   Updated: 2025/05/14 18:10:25 by erico-ke         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	pipe_and_fork(t_pip *lst, char **env)
 		else
 			parent_process(lst, fd, pid[1], env);
 	}
-	waitpid(pid[0], NULL, WNOHANG);
+	waitpid(pid[0], NULL, WUNTRACED);
 	return (EXIT_SUCCESS);
 }
 
